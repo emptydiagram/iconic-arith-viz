@@ -133,10 +133,15 @@
   }
 
   function makeAnglePath(height: number): FormSvgPathConfig {
-    const C = height / 2;
-    const A = C / 4;
-    const anglePath = `M ${-C + A} ${-C} L ${-C - A}  0.0 L  ${-C + A}  ${C}
-                       L  ${C - A}  ${C} L  ${C + A}  0.0 L   ${C - A} ${-C} Z`
+    const C = height / Math.sqrt(3);
+    const anglePath =
+      `M ${C} 0.0
+       L ${C * 0.5} ${C * Math.sqrt(3)/2}
+       L ${-C * 0.5} ${C * Math.sqrt(3)/2}
+       L ${-C} 0.0
+       L ${-C * 0.5} ${-C * Math.sqrt(3)/2}
+       L ${C * 0.5} ${-C * Math.sqrt(3)/2}
+       Z`
     return {
       pathData: anglePath,
       color: ANGLE_COLOR,
@@ -162,7 +167,7 @@
   console.log("anglePath = ", anglePath);
 
   let jOuterSquarePath = makeSquarePath(1.8);
-  let jAnglePath = makeAnglePath(1.15);
+  let jAnglePath = makeAnglePath(1.20);
   let jInnerCircle = makeRoundCircle(0.6);
 
   let divByZeroOuterCircle = makeRoundCircle(1.8);

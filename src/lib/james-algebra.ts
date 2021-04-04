@@ -72,6 +72,14 @@ export function makeJForm() : JamesAlgebraForm {
   );
 }
 
+export function makeDivByZeroForm() : JamesAlgebraForm {
+  return makeRoundContainerForm(
+    [makeAngleContainerForm(
+      [makeSquareContainerForm([])]
+    )]
+  );
+}
+
 export function makeCountingNumberForm(n: number): JamesAlgebraForm{
   if (!Number.isInteger(n) && n > 0) {
     throw Error("argument must be a positive integer");

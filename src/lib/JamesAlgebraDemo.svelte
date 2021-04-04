@@ -34,7 +34,7 @@
     ,form2x3
   ]
 
-  let [svgWidth, svgHeight] = [100, 100];
+  let [svgWidth, svgHeight] = [40, 40];
 
   function renderToString(form: JamesAlgebraForm): string {
     return JamesAlgebraFormRenderer.renderToString(form);
@@ -45,6 +45,28 @@
   // }
 
   let textDisplayList = forms.map(form => renderToString(form));
+
+
+
+  interface FormSvgPathConfig {
+    pathData: string;
+    color: string;
+  }
+
+  interface FormSvgRoundCircleConfig {
+    cx: number;
+    cy: number;
+    r: number;
+    color: string;
+  }
+
+  type FormSvgElementConfig =
+    | FormSvgPathConfig
+    | FormSvgRoundCircleConfig
+
+  const SQUARE_COLOR = "#d42a20"
+  const ANGLE_COLOR = "#fac22b"
+  const ROUND_COLOR = "#0e638e"
 
   // let svgList =
   //   forms.map(form => renderToSvg(form));
@@ -83,19 +105,72 @@
       -2(D + C)(B + A)                  = -A^2 - C^2 + B^2
         (D + C)              = (A^2 + C^2 - B^2) / 2(A + B)
       D = -C + (A^2 + C^2 - B^2) / 2(A+B)
-
   */
+  function makeRoundPath(height: number): FormSvgPathConfig {
+    // const C = 0.8
+    // const A = 0.1
+    const C = height / 2;
+    const A = C / 8;
+    const B = A
+    const D = (Math.pow(A, 2) + Math.pow(C, 2) - Math.pow(B, 2)) / (2 * (A + B)) - C
+    const R = B + C + D
+    const roundPath = `M ${-C + A} ${-C} A ${R} ${R} 0 0 0 ${-C + A} ${C}
+                      L ${C - A} ${C} A ${R} ${R} 0 0 0 ${C - A} ${-C} Z`
+    return {
+      pathData: roundPath,
+      color: ROUND_COLOR,
+    };
+  }
 
-  const C = 0.8
-  const A = 0.1
-  const B = A
-  const D = (Math.pow(A, 2) + Math.pow(C, 2) - Math.pow(B, 2)) / (2 * (A + B)) - C
-  const R = B + C + D
-  const roundPath = `M ${-C + A} ${-C} A ${R} ${R} 0 0 0 ${-C + A} ${C}
-                     L ${C - A} ${C} A ${R} ${R} 0 0 0 ${C - A} ${-C} Z`
+  function makeSquarePath(height: number): FormSvgPathConfig {
+    const C = height / 2;
+    const squarePath = `M ${-C} ${-C} L ${-C} ${C}
+                       L  ${C}  ${C} L  ${C} ${-C} Z`;
+    return {
+      pathData: squarePath,
+      color: SQUARE_COLOR,
+    };
+  }
 
+  function makeAnglePath(height: number): FormSvgPathConfig {
+    const C = height / 2;
+    const A = C / 4;
+    const anglePath = `M ${-C + A} ${-C} L ${-C - A}  0.0 L  ${-C + A}  ${C}
+                       L  ${C - A}  ${C} L  ${C + A}  0.0 L   ${C - A} ${-C} Z`
+    return {
+      pathData: anglePath,
+      color: ANGLE_COLOR,
+    };
+  }
+
+  function makeRoundCircle(height: number): FormSvgRoundCircleConfig {
+    return {
+      cx: 0,
+      cy: 0,
+      r: height/2,
+      color: ROUND_COLOR,
+    }
+  }
+
+  // let roundPath = makeRoundPath(1.2).pathData;
+  let { pathData: roundPath, color: roundStroke } = makeRoundPath(1.2);
   console.log("roundPath = ", roundPath);
 
+  let {pathData: squarePath, color: squareStroke } = makeSquarePath(1.6);
+  console.log("squarePath = ", squarePath);
+
+  let { pathData: anglePath, color: angleStroke } = makeAnglePath(1.4);
+  console.log("anglePath = ", anglePath);
+
+  let jPathsCollection = [
+    makeSquarePath(1.8),
+    makeAnglePath(1.3),
+    makeRoundPath(0.8),
+  ];
+
+  let divByZeroOuterCircle = makeRoundCircle(1.8);
+  let divByZeroAnglePath = makeAnglePath(1.2);
+  let divByZeroSquarePath = makeSquarePath(0.75);
 </script>
 
 <div>
@@ -110,20 +185,18 @@
   <ul id="james-form-svg-list">
     <li>
       <svg width={svgWidth} height={svgHeight} viewBox="-1 -1 2 2">
-        <path d="M -0.8 -0.8 L -0.8  0.8
-                 L  0.8  0.8 L  0.8 -0.8 Z"
-          stroke="#d42a20"
-          stroke-width="0.05"
+        <path d={squarePath}
+          stroke={squareStroke}
+          stroke-width="0.10"
           fill="transparent"
         />
       </svg>
     </li>
     <li>
       <svg width={svgWidth} height={svgHeight} viewBox="-1 -1 2 2">
-        <path d="M -0.7 -0.8 L -0.9  0.0 L  -0.7  0.8
-                 L  0.7  0.8 L  0.9  0.0 L   0.7 -0.8 Z"
-          stroke="#fac22b"
-          stroke-width="0.05"
+        <path d={anglePath}
+          stroke={angleStroke}
+          stroke-width="0.10"
           fill="transparent"
         />
       </svg>
@@ -131,8 +204,49 @@
     <li>
       <svg width={svgWidth} height={svgHeight} viewBox="-1 -1 2 2">
         <path d={roundPath}
-          stroke="#0e638e"
-          stroke-width="0.05"
+          stroke={roundStroke}
+          stroke-width="0.10"
+          fill="transparent"
+        />
+      </svg>
+    </li>
+    <li>
+      <svg width={svgWidth} height={svgHeight} viewBox="-1 -1 2 2">
+        <path d={jPathsCollection[0].pathData}
+          stroke={jPathsCollection[0].color}
+          stroke-width="0.10"
+          fill="transparent"
+        />
+        <path d={jPathsCollection[1].pathData}
+          stroke={jPathsCollection[1].color}
+          stroke-width="0.10"
+          fill="transparent"
+        />
+        <path d={jPathsCollection[2].pathData}
+          stroke={jPathsCollection[2].color}
+          stroke-width="0.10"
+          fill="transparent"
+        />
+      </svg>
+    </li>
+    <li>
+      <svg width={svgWidth} height={svgHeight} viewBox="-1 -1 2 2">
+        <circle
+          cx={divByZeroOuterCircle.cx}
+          cy={divByZeroOuterCircle.cy}
+          r={divByZeroOuterCircle.r}
+          stroke={divByZeroOuterCircle.color}
+          stroke-width="0.10"
+          fill="transparent"
+        />
+        <path d={divByZeroAnglePath.pathData}
+          stroke={divByZeroAnglePath.color}
+          stroke-width="0.10"
+          fill="transparent"
+        />
+        <path d={divByZeroSquarePath.pathData}
+          stroke={divByZeroSquarePath.color}
+          stroke-width="0.10"
           fill="transparent"
         />
       </svg>

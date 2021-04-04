@@ -15,7 +15,7 @@ type JamesAlgebraContainer =
   | JamesAlgebraContainerSquare
   | JamesAlgebraContainerAngle
 
-type JamesAlgebraForm = {
+export interface JamesAlgebraForm {
   root?: JamesAlgebraContainer,
   children: Array<JamesAlgebraForm>,
 }
@@ -86,10 +86,44 @@ export function makeMultForm(multiplicands: Array<JamesAlgebraForm>) : JamesAlge
 
 }
 
+export class JamesAlgebraFormRenderer {
+  static renderToString(f: JamesAlgebraForm): string {
+    let s: string = "";
+    let startSymbol = "";
+    let endSymbol = "";
+    if (f.root) {
+      switch (f.root.containerType) {
+        case "round":
+          startSymbol = "(";
+          endSymbol = ")";
+          break;
+        case "square":
+          startSymbol = "[";
+          endSymbol = "]";
+          break;
+        case "angle":
+          startSymbol = "<";
+          endSymbol = ">";
+          break;
+      }
+    }
+    s = s + startSymbol;
+    if (f.children.length > 0) {
+      for(var i = 0; i < f.children.length; i++) {
+        s = s + this.renderToString(f.children[i]);
+      }
+    } else {
+      s = s + " ";
+    }
+    s = s + endSymbol;
+    return s;
+  }
+
+}
+
 export type {
   JamesAlgebraContainer,
   JamesAlgebraContainerAngle,
   JamesAlgebraContainerRound,
   JamesAlgebraContainerSquare,
-  JamesAlgebraForm,
 }

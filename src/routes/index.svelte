@@ -1,6 +1,6 @@
 <script lang="ts">
 	import Counter from '$lib/Counter.svelte';
-	import JamesAlgebraFormViz from '$lib/JamesAlgebraFormViz.svelte';
+	import JamesAlgebraDemo from '$lib/JamesAlgebraDemo.svelte';
 </script>
 
 <main>
@@ -8,7 +8,7 @@
 
 	<p>example iconic arithmetic forms</p>
 
-	<JamesAlgebraFormViz />
+	<JamesAlgebraDemo />
 </main>
 
 <style>

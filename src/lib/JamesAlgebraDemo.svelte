@@ -34,7 +34,7 @@
     ,form2x3
   ]
 
-  let [svgWidth, svgHeight] = [40, 40];
+  let [svgWidth, svgHeight] = [60, 60];
 
   function renderToString(form: JamesAlgebraForm): string {
     return JamesAlgebraFormRenderer.renderToString(form);
@@ -152,7 +152,6 @@
     }
   }
 
-  // let roundPath = makeRoundPath(1.2).pathData;
   let { pathData: roundPath, color: roundStroke } = makeRoundPath(1.2);
   console.log("roundPath = ", roundPath);
 
@@ -162,15 +161,13 @@
   let { pathData: anglePath, color: angleStroke } = makeAnglePath(1.4);
   console.log("anglePath = ", anglePath);
 
-  let jPathsCollection = [
-    makeSquarePath(1.8),
-    makeAnglePath(1.3),
-    makeRoundPath(0.8),
-  ];
+  let jOuterSquarePath = makeSquarePath(1.8);
+  let jAnglePath = makeAnglePath(1.15);
+  let jInnerCircle = makeRoundCircle(0.6);
 
   let divByZeroOuterCircle = makeRoundCircle(1.8);
-  let divByZeroAnglePath = makeAnglePath(1.2);
-  let divByZeroSquarePath = makeSquarePath(0.75);
+  let divByZeroAnglePath = makeAnglePath(1.15);
+  let divByZeroSquarePath = makeSquarePath(0.50);
 </script>
 
 <div>
@@ -212,18 +209,21 @@
     </li>
     <li>
       <svg width={svgWidth} height={svgHeight} viewBox="-1 -1 2 2">
-        <path d={jPathsCollection[0].pathData}
-          stroke={jPathsCollection[0].color}
+        <path d={jOuterSquarePath.pathData}
+          stroke={jOuterSquarePath.color}
           stroke-width="0.10"
           fill="transparent"
         />
-        <path d={jPathsCollection[1].pathData}
-          stroke={jPathsCollection[1].color}
+        <path d={jAnglePath.pathData}
+          stroke={jAnglePath.color}
           stroke-width="0.10"
           fill="transparent"
         />
-        <path d={jPathsCollection[2].pathData}
-          stroke={jPathsCollection[2].color}
+        <circle
+          cx={jInnerCircle.cx}
+          cy={jInnerCircle.cy}
+          r={jInnerCircle.r}
+          stroke={jInnerCircle.color}
           stroke-width="0.10"
           fill="transparent"
         />

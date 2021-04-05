@@ -392,7 +392,7 @@
     <tr>
       <td>
         <p>reflection pattern axiom</p>
-        <p><code>A &lt;A&gt; = void</code></p>
+        <p><code>A &lt;A&gt; = &nbsp; = void</code></p>
       </td>
       <td>
         <div class="formEquationContainer">

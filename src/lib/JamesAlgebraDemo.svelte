@@ -173,9 +173,18 @@
   let divByZeroOuterCircle = makeRoundCircle(1.8);
   let divByZeroAnglePath = makeAnglePath(1.15);
   let divByZeroSquarePath = makeSquarePath(0.50);
+
+  let baseOuterCircle = makeRoundCircle(1.15)
+  let baseInnerCircle = makeRoundCircle(0.50)
+
+  let invAxiomOuterCircle = makeRoundCircle(1.20)
+  let invAxiomInnerSquarePath = makeSquarePath(0.60)
+
+  let invAxiomOuterSquarePath = makeSquarePath(1.10)
+  let invAxiomInnerCircle = makeRoundCircle(0.65)
 </script>
 
-<div>
+<div id="demo-container">
   <p>hello</p>
 
   <ul id="james-form-text-list">
@@ -184,88 +193,210 @@
     {/each}
   </ul>
 
-  <ul id="james-form-svg-list">
-    <li>
-      <svg width={svgWidth} height={svgHeight} viewBox="-1 -1 2 2">
-        <path d={squarePath}
-          stroke={squareStroke}
-          stroke-width="0.10"
-          fill="transparent"
-        />
-      </svg>
-    </li>
-    <li>
-      <svg width={svgWidth} height={svgHeight} viewBox="-1 -1 2 2">
-        <path d={anglePath}
-          stroke={angleStroke}
-          stroke-width="0.10"
-          fill="transparent"
-        />
-      </svg>
-    </li>
-    <li>
-      <svg width={svgWidth} height={svgHeight} viewBox="-1 -1 2 2">
-        <path d={roundPath}
-          stroke={roundStroke}
-          stroke-width="0.10"
-          fill="transparent"
-        />
-      </svg>
-    </li>
-    <li>
-      <svg width={svgWidth} height={svgHeight} viewBox="-1 -1 2 2">
-        <path d={jOuterSquarePath.pathData}
-          stroke={jOuterSquarePath.color}
-          stroke-width="0.10"
-          fill="transparent"
-        />
-        <path d={jAnglePath.pathData}
-          stroke={jAnglePath.color}
-          stroke-width="0.10"
-          fill="transparent"
-        />
-        <circle
-          cx={jInnerCircle.cx}
-          cy={jInnerCircle.cy}
-          r={jInnerCircle.r}
-          stroke={jInnerCircle.color}
-          stroke-width="0.10"
-          fill="transparent"
-        />
-      </svg>
-    </li>
-    <li>
-      <svg width={svgWidth} height={svgHeight} viewBox="-1 -1 2 2">
-        <circle
-          cx={divByZeroOuterCircle.cx}
-          cy={divByZeroOuterCircle.cy}
-          r={divByZeroOuterCircle.r}
-          stroke={divByZeroOuterCircle.color}
-          stroke-width="0.10"
-          fill="transparent"
-        />
-        <path d={divByZeroAnglePath.pathData}
-          stroke={divByZeroAnglePath.color}
-          stroke-width="0.10"
-          fill="transparent"
-        />
-        <path d={divByZeroSquarePath.pathData}
-          stroke={divByZeroSquarePath.color}
-          stroke-width="0.10"
-          fill="transparent"
-        />
-      </svg>
-    </li>
-  </ul>
+  <table id="james-form-svg-list">
+    <tr>
+      <td>square</td>
+      <td>
+        <svg width={svgWidth} height={svgHeight} viewBox="-1 -1 2 2">
+          <path d={squarePath}
+            stroke={squareStroke}
+            stroke-width="0.10"
+            fill="transparent"
+          />
+        </svg>
+      </td>
+    </tr>
+    <tr>
+      <td>angle</td>
+      <td>
+        <svg width={svgWidth} height={svgHeight} viewBox="-1 -1 2 2">
+          <path d={anglePath}
+            stroke={angleStroke}
+            stroke-width="0.10"
+            fill="transparent"
+          />
+        </svg>
+      </td>
+    </tr>
+    <tr>
+      <td>round</td>
+      <td>
+        <svg width={svgWidth} height={svgHeight} viewBox="-1 -1 2 2">
+          <path d={roundPath}
+            stroke={roundStroke}
+            stroke-width="0.10"
+            fill="transparent"
+          />
+        </svg>
+      </td>
+    </tr>
+    <tr>
+      <td>James imaginary, J:</td>
+      <td>
+        <svg width={svgWidth} height={svgHeight} viewBox="-1 -1 2 2">
+          <path d={jOuterSquarePath.pathData}
+            stroke={jOuterSquarePath.color}
+            stroke-width="0.10"
+            fill="transparent"
+          />
+          <path d={jAnglePath.pathData}
+            stroke={jAnglePath.color}
+            stroke-width="0.10"
+            fill="transparent"
+          />
+          <circle
+            cx={jInnerCircle.cx}
+            cy={jInnerCircle.cy}
+            r={jInnerCircle.r}
+            stroke={jInnerCircle.color}
+            stroke-width="0.10"
+            fill="transparent"
+          />
+        </svg>
+      </td>
+    </tr>
+    <tr>
+      <td>1/0</td>
+      <td>
+        <svg width={svgWidth} height={svgHeight} viewBox="-1 -1 2 2">
+          <circle
+            cx={divByZeroOuterCircle.cx}
+            cy={divByZeroOuterCircle.cy}
+            r={divByZeroOuterCircle.r}
+            stroke={divByZeroOuterCircle.color}
+            stroke-width="0.10"
+            fill="transparent"
+          />
+          <path d={divByZeroAnglePath.pathData}
+            stroke={divByZeroAnglePath.color}
+            stroke-width="0.10"
+            fill="transparent"
+          />
+          <path d={divByZeroSquarePath.pathData}
+            stroke={divByZeroSquarePath.color}
+            stroke-width="0.10"
+            fill="transparent"
+          />
+        </svg>
+      </td>
+    </tr>
+    <tr>
+      <td>base / # / (())</td>
+      <td>
+        <svg width={svgWidth} height={svgHeight} viewBox="-1 -1 2 2">
+          <circle
+            cx={baseOuterCircle.cx}
+            cy={baseOuterCircle.cy}
+            r={baseOuterCircle.r}
+            stroke={baseOuterCircle.color}
+            stroke-width="0.10"
+            fill="transparent"
+          />
+          <circle
+            cx={baseInnerCircle.cx}
+            cy={baseInnerCircle.cy}
+            r={baseInnerCircle.r}
+            stroke={baseInnerCircle.color}
+            stroke-width="0.10"
+            fill="transparent"
+          />
+        </svg>
+      </td>
+    </tr>
+    <tr>
+      <td>inversion pattern axiom</td>
+      <td>
+        <div class="formEquationContainer">
+        <svg width={svgWidth} height={svgHeight} viewBox="-1 -1 2 2">
+          <circle
+            cx={invAxiomOuterCircle.cx}
+            cy={invAxiomOuterCircle.cy}
+            r={invAxiomOuterCircle.r}
+            stroke={invAxiomOuterCircle.color}
+            stroke-width="0.10"
+            fill="transparent"
+          />
+          <path
+            d={invAxiomInnerSquarePath.pathData}
+            stroke={invAxiomInnerSquarePath.color}
+            stroke-width="0.10"
+            fill="transparent"
+          />
+          <text x="-0.16" y="0.20" font-size="0.5" class="symbolText">
+          A
+          </text>
+        </svg>
+        <span> = </span>
+        <svg width={svgWidth} height={svgHeight} viewBox="-1 -1 2 2">
+          <circle
+            cx={invAxiomInnerCircle.cx}
+            cy={invAxiomInnerCircle.cy}
+            r={invAxiomInnerCircle.r}
+            stroke={invAxiomInnerCircle.color}
+            stroke-width="0.10"
+            fill="transparent"
+          />
+          <path
+            d={invAxiomOuterSquarePath.pathData}
+            stroke={invAxiomOuterSquarePath.color}
+            stroke-width="0.10"
+            fill="transparent"
+          />
+          <text x="-0.16" y="0.20" font-size="0.5" class="symbolText">
+          A
+          </text>
+        </svg>
+        <span> = </span>
+        <svg width={svgWidth} height={svgHeight} viewBox="-1 -1 2 2">
+          <text x="-0.16" y="0.20" font-size="0.5" class="symbolText">
+          A
+          </text>
+        </svg>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td>reflection pattern axiom</td>
+      <td>
+        <div class="formEquationContainer">
+        <svg width={svgWidth} height={svgHeight} viewBox="-1 -1 2 2">
+          <text x="-0.64" y="0.20" font-size="0.5" class="symbolText">
+          A
+          </text>
+          <circle
+            cx={invAxiomOuterCircle.cx}
+            cy={invAxiomOuterCircle.cy}
+            r={invAxiomOuterCircle.r}
+            stroke={invAxiomOuterCircle.color}
+            stroke-width="0.10"
+            fill="transparent"
+          />
+          <path
+            d={invAxiomInnerSquarePath.pathData}
+            stroke={invAxiomInnerSquarePath.color}
+            stroke-width="0.10"
+            fill="transparent"
+          />
+          <text x="0.40" y="0.20" font-size="0.5" class="symbolText">
+          A
+          </text>
+        </svg>
+        <span> = </span>
+        <svg width={svgWidth} height={svgHeight} viewBox="-1 -1 2 2">
+        </svg>
+        </div>
+      </td>
+    </tr>
+    </table>
 </div>
 
 
 <style>
   svg {
-    border: 2px dotted pink;
+    /* border: 2px dotted pink; */
   }
 
-  div {
+  div#demo-container {
     border: 1px solid green;
   }
 
@@ -273,5 +404,18 @@
     font-size: 1.3rem;
     font-family: monospace;
     font-weight: bold;
+  }
+
+
+  div.formEquationContainer {
+    display: flex;
+  }
+
+  div.formEquationContainer span {
+    align-self: center;
+  }
+
+  .symbolText {
+    font-family: monospace;
   }
 </style>

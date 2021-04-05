@@ -7,10 +7,12 @@
 
   
   console.log(form);
-  if (form.root) {
-    console.log(" >> root =", form.root);
+  if(form.formType === "container") {
+    if (form.root) {
+      console.log(" >> root =", form.root);
+    }
+    console.log(" >> children =", form.children);
   }
-  console.log(" >> children =", form.children);
 
 </script>
 

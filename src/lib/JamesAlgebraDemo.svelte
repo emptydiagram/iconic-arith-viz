@@ -1,6 +1,6 @@
 <script lang="ts">
   import type {
-    JamesAlgebraForm
+    JamesAlgebraForm,
   } from "./james-algebra";
   import {
     makeDiamondForm,
@@ -10,6 +10,9 @@
     makeVoidForm,
     makeCountingNumberForm,
     makeMultForm,
+    makeRoundContainerForm,
+    makeSquareContainerForm,
+    makeVariableForm,
     JamesAlgebraFormRenderer,
   } from "./james-algebra";
 
@@ -22,6 +25,10 @@
   const form3 = makeCountingNumberForm(3);
   const form2x3 = makeMultForm(
     [makeCountingNumberForm(2), makeCountingNumberForm(3)]);
+  const jFrameInversion = makeRoundContainerForm([
+     makeSquareContainerForm([makeVariableForm("A")])
+    ,makeVariableForm("J")
+  ]);
 
   let forms = [
     formVoid
@@ -32,6 +39,7 @@
     ,form2
     ,form3
     ,form2x3
+    ,jFrameInversion
   ]
 
   let [svgWidth, svgHeight] = [60, 60];
@@ -166,13 +174,10 @@
 
   // let { pathData: roundPath, color: roundStroke } = makeRoundPath(1.2);
   let roundCircle = makeRoundCircle(1.6);
-  console.log("roundPath = ", roundCircle);
 
   let {pathData: squarePath, color: squareStroke } = makeSquarePath(1.6);
-  console.log("squarePath = ", squarePath);
 
   let { pathData: anglePath, color: angleStroke } = makeAnglePath(1.6);
-  console.log("anglePath = ", anglePath);
 
   let jOuterSquarePath = makeSquarePath(1.8);
   let jAnglePath = makeAnglePath(1.20);

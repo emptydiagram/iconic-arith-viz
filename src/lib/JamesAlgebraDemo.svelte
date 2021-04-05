@@ -60,9 +60,16 @@
     color: string;
   }
 
+  interface FormSvgTextConfig {
+    textContent: string;
+    x: number;
+    y: number;
+  }
+
   type FormSvgElementConfig =
     | FormSvgPathConfig
     | FormSvgRoundCircleConfig
+    | FormSvgTextConfig
 
   const SQUARE_COLOR = "#d42a20"
   const ANGLE_COLOR = "#fac22b"

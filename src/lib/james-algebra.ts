@@ -15,56 +15,64 @@ type JamesAlgebraContainer =
   | JamesAlgebraContainerSquare
   | JamesAlgebraContainerAngle
 
-export interface JamesAlgebraForm {
+export interface JamesAlgebraContainerForm {
   root?: JamesAlgebraContainer,
   children: Array<JamesAlgebraForm>,
 }
 
+export interface JamesAlgebraVariableForm {
+  name: string,
+}
+
+export type JamesAlgebraForm =
+  | JamesAlgebraContainerForm
+  | JamesAlgebraVariableForm
+
 export function makeRootedForm(
   root: JamesAlgebraContainer,
-  children: Array<JamesAlgebraForm>
-)  : JamesAlgebraForm {
+  children: Array<JamesAlgebraContainerForm>
+)  : JamesAlgebraContainerForm {
   return {
     root,
     children,
   }
 }
 
-export function makeImplicitContainerForm(children: Array<JamesAlgebraForm>): JamesAlgebraForm {
+export function makeImplicitContainerForm(children: Array<JamesAlgebraContainerForm>): JamesAlgebraContainerForm {
   return {
     children,
   }
 }
 
-export function makeRoundContainerForm(children: Array<JamesAlgebraForm>) {
+export function makeRoundContainerForm(children: Array<JamesAlgebraContainerForm>) {
   return makeRootedForm({"containerType": "round"}, children);
 }
 
-export function makeSquareContainerForm(children: Array<JamesAlgebraForm>) {
+export function makeSquareContainerForm(children: Array<JamesAlgebraContainerForm>) {
   return makeRootedForm({"containerType": "square"}, children);
 }
 
-export function makeAngleContainerForm(children: Array<JamesAlgebraForm>) {
+export function makeAngleContainerForm(children: Array<JamesAlgebraContainerForm>) {
   return makeRootedForm({"containerType": "angle"}, children);
 }
 
-export function makeVoidForm() : JamesAlgebraForm {
+export function makeVoidForm() : JamesAlgebraContainerForm {
   return makeImplicitContainerForm([]);
 }
 
-export function makeUnitForm() : JamesAlgebraForm {
+export function makeUnitForm() : JamesAlgebraContainerForm {
   return makeRoundContainerForm([]);
 }
 
-export function makeSquareForm() : JamesAlgebraForm {
+export function makeSquareForm() : JamesAlgebraContainerForm {
   return makeSquareContainerForm([]);
 }
 
-export function makeDiamondForm() : JamesAlgebraForm {
+export function makeDiamondForm() : JamesAlgebraContainerForm {
   return makeAngleContainerForm([]);
 }
 
-export function makeJForm() : JamesAlgebraForm {
+export function makeJForm() : JamesAlgebraContainerForm {
   return makeSquareContainerForm(
     [makeAngleContainerForm(
       [makeRoundContainerForm([])]
@@ -72,7 +80,7 @@ export function makeJForm() : JamesAlgebraForm {
   );
 }
 
-export function makeDivByZeroForm() : JamesAlgebraForm {
+export function makeDivByZeroForm() : JamesAlgebraContainerForm {
   return makeRoundContainerForm(
     [makeAngleContainerForm(
       [makeSquareContainerForm([])]
@@ -80,7 +88,7 @@ export function makeDivByZeroForm() : JamesAlgebraForm {
   );
 }
 
-export function makeCountingNumberForm(n: number): JamesAlgebraForm{
+export function makeCountingNumberForm(n: number): JamesAlgebraContainerForm{
   if (!Number.isInteger(n) && n > 0) {
     throw Error("argument must be a positive integer");
   }
@@ -88,14 +96,14 @@ export function makeCountingNumberForm(n: number): JamesAlgebraForm{
   return makeImplicitContainerForm(units);
 }
 
-export function makeMultForm(multiplicands: Array<JamesAlgebraForm>) : JamesAlgebraForm {
+export function makeMultForm(multiplicands: Array<JamesAlgebraContainerForm>) : JamesAlgebraContainerForm {
   return makeRoundContainerForm(
     multiplicands.map(form => makeSquareContainerForm([form])));
 
 }
 
 export class JamesAlgebraFormRenderer {
-  static renderToString(f: JamesAlgebraForm): string {
+  static renderToString(f: JamesAlgebraContainerForm): string {
     let s: string = "";
     let startSymbol = "";
     let endSymbol = "";

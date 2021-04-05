@@ -205,7 +205,10 @@
 
   <table id="james-form-svg-list">
     <tr>
-      <td>square</td>
+      <td>
+        <p>square</p>
+        <p><code>[]</code></p>
+      </td>
       <td>
         <svg width={svgWidth} height={svgHeight} viewBox="-1 -1 2 2">
           <path d={squarePath}
@@ -217,7 +220,10 @@
       </td>
     </tr>
     <tr>
-      <td>angle</td>
+      <td>
+        <p>angle</p>
+        <p><code>&lt;&gt;</code></p>
+      </td>
       <td>
         <svg width={svgWidth} height={svgHeight} viewBox="-1 -1 2 2">
           <path d={anglePath}
@@ -229,7 +235,10 @@
       </td>
     </tr>
     <tr>
-      <td>round</td>
+      <td>
+        <p>round</p>
+        <p><code>()</code></p>
+      </td>
       <td>
         <svg width={svgWidth} height={svgHeight} viewBox="-1 -1 2 2">
           <circle
@@ -244,7 +253,10 @@
       </td>
     </tr>
     <tr>
-      <td>James imaginary, J:</td>
+      <td>
+        <p>James imaginary, J</p>
+        <p><code>[&lt;o&gt;]</code></p>
+      </td>
       <td>
         <svg width={svgWidth} height={svgHeight} viewBox="-1 -1 2 2">
           <path d={jOuterSquarePath.pathData}
@@ -269,7 +281,10 @@
       </td>
     </tr>
     <tr>
-      <td>1/0</td>
+      <td>
+        <p>1/0</p>
+        <p><code>(&lt;[]&gt;)</code></p>
+      </td>
       <td>
         <svg width={svgWidth} height={svgHeight} viewBox="-1 -1 2 2">
           <circle
@@ -294,7 +309,10 @@
       </td>
     </tr>
     <tr>
-      <td>base / # / (())</td>
+      <td>
+        <p>base / #</p>
+        <p><code>(())</code></p>
+      </td>
       <td>
         <svg width={svgWidth} height={svgHeight} viewBox="-1 -1 2 2">
           <circle
@@ -317,7 +335,10 @@
       </td>
     </tr>
     <tr>
-      <td>inversion pattern axiom</td>
+      <td>
+        <p>inversion pattern axiom</p>
+        <p><code>([A]) = [(A)] = A</code></p>
+      </td>
       <td>
         <div class="formEquationContainer">
         <svg width={svgWidth} height={svgHeight} viewBox="-1 -1 2 2">
@@ -369,20 +390,25 @@
       </td>
     </tr>
     <tr>
-      <td>reflection pattern axiom</td>
+      <td>
+        <p>reflection pattern axiom</p>
+        <p><code>A &lt;A&gt; = void</code></p>
+      </td>
       <td>
         <div class="formEquationContainer">
         <svg width={svgWidth} height={svgHeight} viewBox="-1 -1 2 2">
-          <text x="-0.70" y="0.0" font-size="0.5" dominant-baseline="mathematical" class="symbolText">
+          <text x="-0.16" y="0.0" font-size="0.5" dominant-baseline="mathematical" class="symbolText">
           A
           </text>
+        </svg>
+        <svg width={svgWidth} height={svgHeight} viewBox="-1 -1 2 2">
           <path
             d={reflAxiomAnglePath.pathData}
             stroke={reflAxiomAnglePath.color}
             stroke-width="0.10"
             fill="transparent"
           />
-          <text x="0.40" y="0.0" font-size="0.5" dominant-baseline="mathematical" class="symbolText">
+          <text x="-0.16" y="0.0" font-size="0.5" dominant-baseline="mathematical" class="symbolText">
           A
           </text>
         </svg>

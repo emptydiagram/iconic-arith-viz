@@ -157,13 +157,14 @@
     }
   }
 
-  let { pathData: roundPath, color: roundStroke } = makeRoundPath(1.2);
-  console.log("roundPath = ", roundPath);
+  // let { pathData: roundPath, color: roundStroke } = makeRoundPath(1.2);
+  let roundCircle = makeRoundCircle(1.6);
+  console.log("roundPath = ", roundCircle);
 
   let {pathData: squarePath, color: squareStroke } = makeSquarePath(1.6);
   console.log("squarePath = ", squarePath);
 
-  let { pathData: anglePath, color: angleStroke } = makeAnglePath(1.4);
+  let { pathData: anglePath, color: angleStroke } = makeAnglePath(1.6);
   console.log("anglePath = ", anglePath);
 
   let jOuterSquarePath = makeSquarePath(1.8);
@@ -224,8 +225,11 @@
       <td>round</td>
       <td>
         <svg width={svgWidth} height={svgHeight} viewBox="-1 -1 2 2">
-          <path d={roundPath}
-            stroke={roundStroke}
+          <circle
+            cx={roundCircle.cx}
+            cy={roundCircle.cy}
+            r={roundCircle.r}
+            stroke={roundCircle.color}
             stroke-width="0.10"
             fill="transparent"
           />

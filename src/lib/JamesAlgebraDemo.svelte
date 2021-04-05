@@ -182,6 +182,8 @@
 
   let invAxiomOuterSquarePath = makeSquarePath(1.10)
   let invAxiomInnerCircle = makeRoundCircle(0.65)
+
+  let reflAxiomAnglePath = makeAnglePath(0.6);
 </script>
 
 <div id="demo-container">
@@ -322,7 +324,7 @@
             stroke-width="0.10"
             fill="transparent"
           />
-          <text x="-0.16" y="0.20" font-size="0.5" class="symbolText">
+          <text x="-0.16" y="0.0" font-size="0.5" dominant-baseline="mathematical" class="symbolText">
           A
           </text>
         </svg>
@@ -342,13 +344,13 @@
             stroke-width="0.10"
             fill="transparent"
           />
-          <text x="-0.16" y="0.20" font-size="0.5" class="symbolText">
+          <text x="-0.16" y="0.0" font-size="0.5" dominant-baseline="mathematical" class="symbolText">
           A
           </text>
         </svg>
         <span> = </span>
         <svg width={svgWidth} height={svgHeight} viewBox="-1 -1 2 2">
-          <text x="-0.16" y="0.20" font-size="0.5" class="symbolText">
+          <text x="-0.16" y="0.0" font-size="0.5" dominant-baseline="mathematical" class="symbolText">
           A
           </text>
         </svg>
@@ -360,24 +362,16 @@
       <td>
         <div class="formEquationContainer">
         <svg width={svgWidth} height={svgHeight} viewBox="-1 -1 2 2">
-          <text x="-0.64" y="0.20" font-size="0.5" class="symbolText">
+          <text x="-0.70" y="0.0" font-size="0.5" dominant-baseline="mathematical" class="symbolText">
           A
           </text>
-          <circle
-            cx={invAxiomOuterCircle.cx}
-            cy={invAxiomOuterCircle.cy}
-            r={invAxiomOuterCircle.r}
-            stroke={invAxiomOuterCircle.color}
-            stroke-width="0.10"
-            fill="transparent"
-          />
           <path
-            d={invAxiomInnerSquarePath.pathData}
-            stroke={invAxiomInnerSquarePath.color}
+            d={reflAxiomAnglePath.pathData}
+            stroke={reflAxiomAnglePath.color}
             stroke-width="0.10"
             fill="transparent"
           />
-          <text x="0.40" y="0.20" font-size="0.5" class="symbolText">
+          <text x="0.40" y="0.0" font-size="0.5" dominant-baseline="mathematical" class="symbolText">
           A
           </text>
         </svg>

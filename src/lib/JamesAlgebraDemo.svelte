@@ -1,6 +1,6 @@
 <script lang="ts">
   import type {
-    JamesAlgebraForm,
+    JamesAlgebraForm
   } from "./james-algebra";
   import {
     makeDiamondForm,
@@ -13,6 +13,7 @@
     makeRoundContainerForm,
     makeSquareContainerForm,
     makeVariableForm,
+    JamesAlgebraFormParser,
     JamesAlgebraFormRenderer,
   } from "./james-algebra";
 
@@ -53,6 +54,48 @@
   // }
 
   let textDisplayList = forms.map(form => renderToString(form));
+
+  let parser = new JamesAlgebraFormParser();
+  let parsedBlank = parser.parse("  ");
+  console.log("++++++++++++++++++++++++++++++++")
+  let parsedUnit = parser.parse("()");
+  // let parsedSquare = parser.parse("[]");
+  // let parsedDiamond = parser.parse("<>");
+  // let parseBase = parser.parse("(())");
+  // let parseInv1 = parser.parse("[()]");
+  // let parseInv2 = parser.parse("([])");
+  // let parsed2 = parser.parse("()()");
+  // let parsed2Os = parser.parse("oo");
+  // let parsed3 = parser.parse("()()()");
+  // let parsed3Os = parser.parse("ooo");
+  // let parsedHalf = parser.parse("(<[()()]>)");
+  // let parsedHalfOs = parser.parse("(<[oo]>)");
+  // let parsed2div3 = parser.parse("([()()] <[()()()]>)");
+  // let parsed2div3Os = parser.parse("([oo] <[ooo]>)");
+  // let parsedJ = parser.parse("[<()>]");
+  // let parsedHalfJ = parser.parse("([[<o>]] <[oo]>)");
+  // let parsedJRefl = parser.parse("A ([A] J)");
+  // let parsedJSelfOccl = parser.parse("J ([J] J)");
+  // let parsed2div3Numerals = parser.parse("([2] <[3]>)");
+  // let parsediLine1 = parser.parse("(([[<o>]] <[oo]>))");
+  // let parsediLine2 = parser.parse("(([J] <[2]>))");
+  // let parsediLine3 = parser.parse("(J/2)");
+
+  console.log("++++++++++++++++++++++++++++++++")
+  console.log("end of parsing")
+  console.log("")
+
+  console.log(" :: parsedBlank = ", parsedBlank);
+  console.log(" :: parsedUnit = ", parsedUnit);
+  // console.log(" :: parsedSquare = ", parsedSquare);
+  // console.log(" :: parsedDiamond = ", parsedDiamond);
+  // console.log(" :: parsed2 = ", parsed2);
+  // console.log(" :: parsed3 = ", parsed3);
+  // console.log(" :: parsedHalf = ", parsedHalf);
+  // console.log(" :: parsed2div3 = ", parsed2div3);
+  // console.log(" :: parsedJ = ", parsedJ);
+  // console.log(" :: parsedHalfJ = ", parsedHalfJ);
+
 
 
 

@@ -1,7 +1,4 @@
 <script lang="ts">
-  import type {
-    JamesAlgebraForm
-  } from "iconic-arith-lib";
   import {
     makeDiamondForm,
     makeJForm,
@@ -17,6 +14,11 @@
     makeRoundCircle,
     makeAnglePath,
     makeSquarePath,
+    renderToSvg,
+  } from "iconic-arith-lib";
+
+  import type {
+    JamesAlgebraForm,
   } from "iconic-arith-lib";
 
   const formVoid = makeVoidForm();
@@ -87,6 +89,9 @@
   let invAxiomInnerCircle = makeRoundCircle(0.65)
 
   let reflAxiomAnglePath = makeAnglePath(0.6);
+
+
+  let renderedJConfigs = renderToSvg(makeJForm());
 </script>
 
 <div id="demo-container">
@@ -97,6 +102,10 @@
     <li>{line}</li>
     {/each}
   </ul>
+
+  <hr/>
+
+  <h1>manual demo</h1>
 
   <table id="james-form-svg-list">
     <tr>
@@ -314,8 +323,33 @@
       </td>
     </tr>
     </table>
-</div>
 
+
+  <hr/>
+
+  <h1>render demo</h1>
+
+  <table id="james-form-render-svg-list">
+    <tr>
+      <td>
+        <p>square</p>
+        <p><code>[]</code></p>
+      </td>
+      <td>
+        <svg width={svgWidth} height={svgHeight} viewBox="-1 -1 2 2">
+          {#each forms as form }
+          <path d={squarePath}
+            stroke={squareStroke}
+            stroke-width="0.10"
+            fill="transparent"
+          />
+          {/each}
+        </svg>
+      </td>
+    </tr>
+    </table>
+
+</div>
 
 <style>
   svg {

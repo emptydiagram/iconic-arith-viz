@@ -85,7 +85,7 @@
     makeFormDisplayInfo("([])", "inversion pair"),
     makeFormDisplayInfo("[()]", "inversion pair"),
     makeFormDisplayInfo("[<>]", "basically square"),
-    makeFormDisplayInfo("[[]]", ":cthulu:"),
+    makeFormDisplayInfo("[[]]", "loglog0"),
     makeFormDisplayInfo("<()>", "-1"),
     makeFormDisplayInfo("<<>>", "basically void"),
     makeFormDisplayInfo("<[]>", "positive infinity"),

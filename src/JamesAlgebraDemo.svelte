@@ -15,6 +15,9 @@
     makeAnglePath,
     makeSquarePath,
     renderToSvg,
+    makeAngleContainerForm,
+    FormSvgElementConfig,
+    JamesAlgebraParser,
   } from "iconic-arith-lib";
 
   import type {
@@ -54,15 +57,62 @@
     return JamesAlgebraFormRenderer.renderToString(form);
   }
 
-  // function renderToSvg(form: JamesAlgebraForm): JamesAlgebraSvgFigureConfig {
-  //   return JamesAlgebraFormRenderer.renderToSvgNode(form);
-  // }
-
   let textDisplayList = forms.map(form => renderToString(form));
 
+  // <(J)>
+  let angleRoundJ = makeAngleContainerForm([
+    makeRoundContainerForm([makeJForm()])
+  ]);
 
-  // let svgList =
-  //   forms.map(form => renderToSvg(form));
+  interface FormDisplayInfo {
+    text: string;
+    description: string;
+  }
+
+  function makeFormDisplayInfo(text: string, description: string) {
+    return {
+      text,
+      description,
+    }
+  }
+
+  let formInfos : FormDisplayInfo[] = [
+    makeFormDisplayInfo("()", "round. unit. 1 = exp(0)"),
+    makeFormDisplayInfo("<>", "angle"),
+    makeFormDisplayInfo("[]", "square. log0 = negative infinity"),
+    makeFormDisplayInfo("(())", "base / #"),
+    makeFormDisplayInfo("(<>)", "basically 1"),
+    makeFormDisplayInfo("([])", "inversion pair"),
+    makeFormDisplayInfo("[()]", "inversion pair"),
+    makeFormDisplayInfo("[<>]", "basically square"),
+    makeFormDisplayInfo("[[]]", ":cthulu:"),
+    makeFormDisplayInfo("<()>", "-1"),
+    makeFormDisplayInfo("<<>>", "basically void"),
+    makeFormDisplayInfo("<[]>", "positive infinity"),
+    makeFormDisplayInfo("[<()>]", "J"),
+    makeFormDisplayInfo("(<[]>)", "1/0"),
+    makeFormDisplayInfo("[(())]", "basically 1"),
+    makeFormDisplayInfo("(J)", "the definition of -1?"),
+    makeFormDisplayInfo("(<[()]>)", "1/1"),
+  ];
+
+  interface FormFullDisplayConfig extends FormDisplayInfo {
+    svgElementConfig: FormSvgElementConfig[];
+  }
+
+  // let formParses : JamesAlgebraForm[] = formInfos
+  //   .map(displayInfo => displayInfo.text)
+  //   .map(text => JamesAlgebraParser.parse(text));
+
+  let formDisplayConfigs: FormFullDisplayConfig[] = formInfos.map(formInfo => {
+    let form = JamesAlgebraParser.parse(formInfo.text);
+    return {
+      text: formInfo.text,
+      description: formInfo.description,
+      svgElementConfig: renderToSvg(form),
+    };
+  });
+    // });
 
   // let { pathData: roundPath, color: roundStroke } = makeRoundPath(1.2);
   let roundCircle = makeRoundCircle(1.6);
@@ -327,26 +377,48 @@
 
   <hr/>
 
-  <h1>render demo</h1>
+  <h1>renderToSvg demo</h1>
 
   <table id="james-form-render-svg-list">
+    {#each formDisplayConfigs as formConfig}
     <tr>
       <td>
-        <p>square</p>
-        <p><code>[]</code></p>
+        <p>{formConfig.description}</p>
+        <p><code>{formConfig.text}</code></p>
       </td>
       <td>
         <svg width={svgWidth} height={svgHeight} viewBox="-1 -1 2 2">
-          {#each forms as form }
-          <path d={squarePath}
-            stroke={squareStroke}
-            stroke-width="0.10"
-            fill="transparent"
-          />
-          {/each}
+            {#each formConfig.svgElementConfig as elemConfig}
+              {#if elemConfig.elementType === "path"}
+                <path d={elemConfig.pathData}
+                  stroke={elemConfig.color}
+                  stroke-width="0.10"
+                  fill="transparent"
+                />
+              {:else if elemConfig.elementType === "circle"}
+                <circle
+                  cx={elemConfig.cx}
+                  cy={elemConfig.cy}
+                  r={elemConfig.r}
+                  stroke={elemConfig.color}
+                  stroke-width="0.10"
+                  fill="transparent"
+                />
+              {:else}
+                <text
+                  x={elemConfig.x}
+                  y={elemConfig.y}
+                  font-size="0.5"
+                  dominant-baseline="mathematical"
+                  class="symbolText">
+                  {elemConfig.textContent}
+                </text>
+              {/if}
+            {/each}
         </svg>
       </td>
     </tr>
+    {/each}
     </table>
 
 </div>
